@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.flcit.springboot.commons.actuator.CommonsActuatorAutoConfiguration,\
+org.flcit.springboot.commons.actuator.ConfigurationActuatorAutoConfiguration,\
+org.flcit.springboot.commons.actuator.JmsListenersActuatorAutoConfiguration,\
+org.flcit.springboot.commons.actuator.ExecutorsActuatorAutoConfiguration,\
+org.flcit.springboot.commons.actuator.RestTemplatesActuatorAutoConfiguration,\
+org.flcit.springboot.commons.actuator.HttpRequestInterceptorsActuatorAutoConfiguration
