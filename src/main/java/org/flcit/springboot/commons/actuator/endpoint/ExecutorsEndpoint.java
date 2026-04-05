@@ -118,17 +118,17 @@ public class ExecutorsEndpoint extends AbstractBeansEndpoint<Executor, BaseExecu
     }
 
     private static final ThreadPoolExecutor getThreadPoolExecutor(final Executor executor) {
-        if (executor instanceof ExecutorConfigurationSupport) {
-            return getThreadPoolExecutor((ExecutorConfigurationSupport) executor);
+        if (executor instanceof ExecutorConfigurationSupport executorConfigurationSupport) {
+            return getThreadPoolExecutor(executorConfigurationSupport);
         }
         return null;
     }
 
     private static final ThreadPoolExecutor getThreadPoolExecutor(final ExecutorConfigurationSupport executorConfiguration) {
-        if (executorConfiguration instanceof ThreadPoolTaskScheduler) {
-            return ((ThreadPoolTaskScheduler) executorConfiguration).getScheduledThreadPoolExecutor();
-        } else if (executorConfiguration instanceof ThreadPoolTaskExecutor) {
-            return ((ThreadPoolTaskExecutor) executorConfiguration).getThreadPoolExecutor();
+        if (executorConfiguration instanceof ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+            return threadPoolTaskScheduler.getScheduledThreadPoolExecutor();
+        } else if (executorConfiguration instanceof ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+            return threadPoolTaskExecutor.getThreadPoolExecutor();
         }
         return null;
     }

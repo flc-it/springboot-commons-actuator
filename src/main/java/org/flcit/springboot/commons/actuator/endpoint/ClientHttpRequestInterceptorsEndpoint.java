@@ -29,7 +29,6 @@ import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.lang.Nullable;
-
 import org.flcit.springboot.commons.actuator.clienthttprequestinterceptor.BaseClientHttpRequestInterceptor;
 import org.flcit.springboot.commons.actuator.clienthttprequestinterceptor.update.BaseClientHttpRequestInterceptorUpdate;
 import org.flcit.springboot.commons.actuator.clienthttprequestinterceptor.update.ClientHttpRequestInterceptorAction;
@@ -106,9 +105,9 @@ public class ClientHttpRequestInterceptorsEndpoint extends AbstractBeansEndpoint
      * @param interceptor
      */
     public static final void refresh(final ClientHttpRequestInterceptor interceptor) {
-        if (interceptor instanceof Refreshable) {
+        if (interceptor instanceof Refreshable refreshable) {
             try {
-                ((Refreshable) interceptor).refresh();
+                refreshable.refresh();
             } catch (RefreshFailedException e) {
                 throw new IllegalStateException(e);
             }

@@ -7,5 +7,5 @@ Le projet *springboot-commons-actuator* est la librairie pour les endpoints actu
 ## Configuration
 Par défaut le endpoint /actuator/configuration est désactivé, pour l'activer :
 ```properties
-management.endpoint.configuration.enabled=true
+management.endpoint.configuration.access=unrestricted
 ```

@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.springframework.boot.actuate.endpoint.Access;
 import org.springframework.boot.actuate.endpoint.annotation.DeleteOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
@@ -50,7 +51,7 @@ import org.flcit.springboot.commons.core.util.BeanUtils;
  * @since 
  * @author Florian Lestic
  */
-@Endpoint(id = "configuration", enableByDefault = false)
+@Endpoint(id = "configuration", defaultAccess = Access.NONE)
 public class ConfigurationEndpoint {
 
     /**
@@ -280,8 +281,8 @@ public class ConfigurationEndpoint {
         if (value == null) {
             return new byte[0];
         }
-        if (value instanceof String) {
-            return ((String) value).getBytes();
+        if (value instanceof String string) {
+            return string.getBytes();
         }
         return toBytes(value.toString());
     }
