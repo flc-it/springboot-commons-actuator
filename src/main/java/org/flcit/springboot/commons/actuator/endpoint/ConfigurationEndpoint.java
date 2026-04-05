@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.springframework.boot.actuate.endpoint.Access;
 import org.springframework.boot.actuate.endpoint.annotation.DeleteOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Endpoint;
 import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
@@ -37,20 +38,20 @@ import org.springframework.core.env.EnumerablePropertySource;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.http.MediaType;
-import org.springframework.lang.Nullable;
 import org.springframework.util.ObjectUtils;
 
 import org.flcit.springboot.commons.actuator.configuration.ConfigurationAction;
 import org.flcit.springboot.commons.actuator.configuration.ConfigurationSearchOperator;
 import org.flcit.springboot.commons.actuator.configuration.ConfigurationType;
 import org.flcit.springboot.commons.core.util.BeanUtils;
+import org.jspecify.annotations.Nullable;
 
 /**
  * 
  * @since 
  * @author Florian Lestic
  */
-@Endpoint(id = "configuration", enableByDefault = false)
+@Endpoint(id = "configuration", defaultAccess = Access.NONE)
 public class ConfigurationEndpoint {
 
     /**
@@ -280,8 +281,8 @@ public class ConfigurationEndpoint {
         if (value == null) {
             return new byte[0];
         }
-        if (value instanceof String) {
-            return ((String) value).getBytes();
+        if (value instanceof String string) {
+            return string.getBytes();
         }
         return toBytes(value.toString());
     }

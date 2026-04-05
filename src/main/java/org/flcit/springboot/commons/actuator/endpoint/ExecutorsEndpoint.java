@@ -29,7 +29,6 @@ import org.springframework.boot.actuate.endpoint.annotation.ReadOperation;
 import org.springframework.boot.actuate.endpoint.annotation.Selector;
 import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.lang.Nullable;
 import org.springframework.scheduling.concurrent.ExecutorConfigurationSupport;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -40,6 +39,7 @@ import org.flcit.springboot.commons.actuator.executor.update.ExecutorAction;
 import org.flcit.springboot.commons.actuator.executor.update.ThreadPoolExecutorUpdate;
 import org.flcit.springboot.commons.actuator.util.CommonsActuatorUtils;
 import org.flcit.springboot.commons.core.util.BeanUtils;
+import org.jspecify.annotations.Nullable;
 import org.flcit.commons.core.util.ReflectionUtils;
 
 /**
@@ -118,17 +118,17 @@ public class ExecutorsEndpoint extends AbstractBeansEndpoint<Executor, BaseExecu
     }
 
     private static final ThreadPoolExecutor getThreadPoolExecutor(final Executor executor) {
-        if (executor instanceof ExecutorConfigurationSupport) {
-            return getThreadPoolExecutor((ExecutorConfigurationSupport) executor);
+        if (executor instanceof ExecutorConfigurationSupport executorConfigurationSupport) {
+            return getThreadPoolExecutor(executorConfigurationSupport);
         }
         return null;
     }
 
     private static final ThreadPoolExecutor getThreadPoolExecutor(final ExecutorConfigurationSupport executorConfiguration) {
-        if (executorConfiguration instanceof ThreadPoolTaskScheduler) {
-            return ((ThreadPoolTaskScheduler) executorConfiguration).getScheduledThreadPoolExecutor();
-        } else if (executorConfiguration instanceof ThreadPoolTaskExecutor) {
-            return ((ThreadPoolTaskExecutor) executorConfiguration).getThreadPoolExecutor();
+        if (executorConfiguration instanceof ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+            return threadPoolTaskScheduler.getScheduledThreadPoolExecutor();
+        } else if (executorConfiguration instanceof ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+            return threadPoolTaskExecutor.getThreadPoolExecutor();
         }
         return null;
     }

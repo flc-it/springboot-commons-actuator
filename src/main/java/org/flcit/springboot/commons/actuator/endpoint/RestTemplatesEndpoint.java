@@ -28,7 +28,6 @@ import org.springframework.boot.logging.LogLevel;
 import org.springframework.boot.logging.LoggingSystem;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -39,6 +38,7 @@ import org.flcit.springboot.commons.actuator.resttemplate.update.RestTemplateAct
 import org.flcit.springboot.commons.actuator.resttemplate.update.RestTemplateUpdate;
 import org.flcit.springboot.commons.actuator.util.CommonsActuatorUtils;
 import org.flcit.springboot.commons.core.util.BeanUtils;
+import org.jspecify.annotations.Nullable;
 import org.flcit.commons.core.util.BooleanUtils;
 import org.flcit.commons.core.util.ReflectionUtils;
 

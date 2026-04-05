@@ -26,7 +26,6 @@ import org.springframework.boot.actuate.endpoint.annotation.Selector;
 import org.springframework.boot.actuate.endpoint.annotation.WriteOperation;
 import org.springframework.jms.config.JmsListenerEndpointRegistry;
 import org.springframework.jms.listener.MessageListenerContainer;
-import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 
 import org.flcit.springboot.commons.actuator.jms.BaseJmsListener;
@@ -35,6 +34,7 @@ import org.flcit.springboot.commons.actuator.jms.update.JmsListenerAction;
 import org.flcit.springboot.commons.actuator.jms.update.JmsListenerUpdate;
 import org.flcit.springboot.commons.actuator.util.CommonsActuatorUtils;
 import org.flcit.springboot.commons.core.util.BeanUtils;
+import org.jspecify.annotations.Nullable;
 
 /**
  * 

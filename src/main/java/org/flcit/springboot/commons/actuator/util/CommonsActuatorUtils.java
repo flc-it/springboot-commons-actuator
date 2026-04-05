@@ -60,7 +60,7 @@ public final class CommonsActuatorUtils {
     public static BaseJmsListener convert(final String id, final MessageListenerContainer listener) {
         Assert.notNull(id, "Id must not be null");
         Assert.notNull(listener, "Listener must not be null");
-        return listener instanceof DefaultMessageListenerContainer ? new DefaultJmsListener(id, (DefaultMessageListenerContainer) listener) : new BaseJmsListener(id, listener);
+        return listener instanceof DefaultMessageListenerContainer defaultMessageListenerContainer ? new DefaultJmsListener(id, defaultMessageListenerContainer) : new BaseJmsListener(id, listener);
     }
 
     /**
@@ -78,12 +78,12 @@ public final class CommonsActuatorUtils {
      */
     public static BaseExecutor convert(final String name, final Executor executor) {
         Assert.notNull(executor, "Executor must not be null");
-        if (executor instanceof ThreadPoolTaskScheduler) {
-            return new ThreadPoolTaskSchedulerDTO(name, (ThreadPoolTaskScheduler) executor);
-        } else if (executor instanceof ThreadPoolTaskExecutor) {
-            return new ThreadPoolTaskExecutorDTO(name, (ThreadPoolTaskExecutor) executor);
-        } else if (executor instanceof SimpleAsyncTaskExecutor) {
-            return new SimpleAsyncTaskExecutorDTO(name, (SimpleAsyncTaskExecutor) executor);
+        if (executor instanceof ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+            return new ThreadPoolTaskSchedulerDTO(name, threadPoolTaskScheduler);
+        } else if (executor instanceof ThreadPoolTaskExecutor threadPoolTaskExecutor) {
+            return new ThreadPoolTaskExecutorDTO(name, threadPoolTaskExecutor);
+        } else if (executor instanceof SimpleAsyncTaskExecutor simpleAsyncTaskExecutor) {
+            return new SimpleAsyncTaskExecutorDTO(name, simpleAsyncTaskExecutor);
         }
         return null;
     }
@@ -179,7 +179,7 @@ public final class CommonsActuatorUtils {
         }
         Object obj = ReflectionUtils.getFieldValue(object, field);
         if (obj == null) {
-            obj = field.getType().newInstance();
+            obj = field.getType().getDeclaredConstructor().newInstance();
             ReflectionUtils.setFieldValue(object, field, obj);
         }
         return obj;
